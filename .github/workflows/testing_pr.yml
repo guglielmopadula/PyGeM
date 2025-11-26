@@ -27,7 +27,7 @@ jobs:
         channels: anaconda, conda-forge
     
     - name: Installing conda
-      shell: bash
+      shell: bash -el {0}
       run: |
         conda install --yes -c conda-forge -c anaconda pythonocc-core
         python -m pip install --upgrade pip
@@ -35,5 +35,6 @@ jobs:
         python -m pip install .[test]
 
     - name: Test with pytest
+      shell: bash -el {0}
       run: |
         python -m pytest
