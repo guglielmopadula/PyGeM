@@ -27,7 +27,8 @@ jobs:
   
     - name: Install Python dependencies
       run: |
-        conda install --yes pythonocc-core=7.4.0
+        conda create -y -n testenv python=${{ matrix.python-version }}
+        conda activate testenv        
         python -m pip install --upgrade pip
         python -m pip install smithers[vtk]
         python -m pip install .[test]
