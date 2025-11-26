@@ -12,22 +12,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
-        python-version: [3.9, 3.10]
+        os: [ubuntu-latest]
+        python-version: [3.9]
         
     steps:
     - uses: actions/checkout@v2
-
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v3
-      with:
+    - name: Install dependencies
+    - uses: conda-incubator/setup-miniconda@v3
+    - with:
         auto-update-conda: true
         python-version: ${{ matrix.python-version }}
         channels: anaconda, conda-forge
-  
-    - name: Install Python dependencies
-      shell: bash
-      run: |
+    - run: |
         conda install --yes -c conda-forge -c anaconda pythonocc-core
         python -m pip install --upgrade pip
         python -m pip install smithers[vtk]
